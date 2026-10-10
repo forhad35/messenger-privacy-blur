@@ -1,0 +1,471 @@
+/**
+ * Messenger Privacy Blur - Content Stylesheet
+ * Inspired by WA Web Plus: Hover or focus to reveal blurred content.
+ */
+
+:root {
+  --msg-blur-radius: 10px;
+  --msg-blur-media-radius: 16px;
+  --msg-transition-speed: 0.18s;
+}
+
+/* ==========================================================================
+   1. MESSAGES BLUR (Text bubbles in active chat)
+   ========================================================================== */
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] [dir="auto"],
+html.msg-blur-enabled.blur-messages [role="main"] [role="row"] [dir="auto"],
+html.msg-blur-enabled.blur-messages [role="main"] div[aria-label*="Messages" i] [dir="auto"] {
+  filter: blur(var(--msg-blur-radius)) !important;
+  transition: filter var(--msg-transition-speed) cubic-bezier(0.4, 0, 0.2, 1) !important;
+  user-select: none !important;
+}
+
+/* Reveal message on hover: direct text hover */
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] [dir="auto"]:hover,
+html.msg-blur-enabled.blur-messages [role="main"] [dir="auto"]:hover,
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] [dir="auto"]:hover *,
+html.msg-blur-enabled.blur-messages [role="main"] [dir="auto"]:hover * {
+  filter: blur(0px) !important;
+  user-select: text !important;
+}
+
+/* Reveal message on hover: parent bubble / row hover using CSS :has() */
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] div:has(> [dir="auto"]):hover [dir="auto"],
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] div:has(> [dir="auto"]):hover [dir="auto"] *,
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] div:has(> div > [dir="auto"]):hover [dir="auto"],
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] div:has(> div > [dir="auto"]):hover [dir="auto"] *,
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] div:has(> div > div > [dir="auto"]):hover [dir="auto"],
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] div:has(> div > div > [dir="auto"]):hover [dir="auto"] *,
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] div:has(> div > div > div > [dir="auto"]):hover [dir="auto"],
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] div:has(> div > div > div > [dir="auto"]):hover [dir="auto"] *,
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] div:has(> div > div > div > div > [dir="auto"]):hover [dir="auto"],
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] div:has(> div > div > div > div > [dir="auto"]):hover [dir="auto"] *,
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] [role="row"]:hover [dir="auto"],
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] [role="row"]:hover [dir="auto"] *,
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] [role="gridcell"]:hover [dir="auto"],
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] [role="gridcell"]:hover [dir="auto"] *,
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] > div > div:hover [dir="auto"],
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] > div > div:hover [dir="auto"] *,
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] > div > div > div:hover [dir="auto"],
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] > div > div > div:hover [dir="auto"] * {
+  filter: blur(0px) !important;
+  user-select: text !important;
+}
+
+
+/* ==========================================================================
+   2. MEDIA BLUR (Photos, Videos, Stickers, Voice notes in chat)
+   ========================================================================== */
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] img,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] video,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] audio,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="img"]:not(svg),
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [aria-label*="photo" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [aria-label*="image" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [aria-label*="video" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [aria-label*="sticker" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [aria-label*="voice clip" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [aria-label*="audio" i] {
+  filter: blur(var(--msg-blur-media-radius)) !important;
+  transition: filter var(--msg-transition-speed) cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Reveal media and emojis on hover */
+html.msg-blur-enabled [role="main"] [role="grid"] img:hover,
+html.msg-blur-enabled [role="main"] [role="grid"] video:hover,
+html.msg-blur-enabled [role="main"] [role="grid"] audio:hover,
+html.msg-blur-enabled [role="main"] [role="grid"] [role="img"]:hover,
+html.msg-blur-enabled [role="main"] [role="grid"] [aria-label*="sticker" i]:hover,
+html.msg-blur-enabled [role="main"] [role="grid"] [aria-label*="photo" i]:hover,
+html.msg-blur-enabled [role="main"] [role="grid"] [aria-label*="image" i]:hover,
+html.msg-blur-enabled [role="main"] [role="grid"] [aria-label*="video" i]:hover,
+html.msg-blur-enabled [role="main"] [role="grid"] [aria-label*="voice clip" i]:hover,
+html.msg-blur-enabled [role="main"] [role="grid"] [aria-label*="audio" i]:hover,
+
+html.msg-blur-enabled [role="main"] [role="grid"] [role="row"]:hover img,
+html.msg-blur-enabled [role="main"] [role="grid"] [role="row"]:hover video,
+html.msg-blur-enabled [role="main"] [role="grid"] [role="row"]:hover audio,
+html.msg-blur-enabled [role="main"] [role="grid"] [role="row"]:hover [role="img"]:not(svg),
+html.msg-blur-enabled [role="main"] [role="grid"] [role="row"]:hover svg,
+html.msg-blur-enabled [role="main"] [role="grid"] [role="row"]:hover svg image,
+html.msg-blur-enabled [role="main"] [role="grid"] [role="row"]:hover [aria-label*="sticker" i],
+html.msg-blur-enabled [role="main"] [role="grid"] [role="row"]:hover [aria-label*="photo" i],
+html.msg-blur-enabled [role="main"] [role="grid"] [role="row"]:hover [aria-label*="image" i],
+html.msg-blur-enabled [role="main"] [role="grid"] [role="row"]:hover [aria-label*="video" i],
+html.msg-blur-enabled [role="main"] [role="grid"] [role="row"]:hover [aria-label*="voice clip" i],
+html.msg-blur-enabled [role="main"] [role="grid"] [role="row"]:hover [aria-label*="audio" i],
+
+html.msg-blur-enabled [role="main"] [role="grid"] [role="gridcell"]:hover img,
+html.msg-blur-enabled [role="main"] [role="grid"] [role="gridcell"]:hover video,
+html.msg-blur-enabled [role="main"] [role="grid"] [role="gridcell"]:hover audio,
+html.msg-blur-enabled [role="main"] [role="grid"] [role="gridcell"]:hover [role="img"]:not(svg),
+html.msg-blur-enabled [role="main"] [role="grid"] [role="gridcell"]:hover svg,
+html.msg-blur-enabled [role="main"] [role="grid"] [role="gridcell"]:hover svg image,
+html.msg-blur-enabled [role="main"] [role="grid"] [role="gridcell"]:hover [aria-label*="sticker" i],
+html.msg-blur-enabled [role="main"] [role="grid"] [role="gridcell"]:hover [aria-label*="photo" i],
+html.msg-blur-enabled [role="main"] [role="grid"] [role="gridcell"]:hover [aria-label*="image" i],
+html.msg-blur-enabled [role="main"] [role="grid"] [role="gridcell"]:hover [aria-label*="video" i],
+
+html.msg-blur-enabled [role="main"] [role="grid"] div:has(> img):hover img,
+html.msg-blur-enabled [role="main"] [role="grid"] div:has(> div > img):hover img,
+html.msg-blur-enabled [role="main"] [role="grid"] div:has(> div > div > img):hover img,
+html.msg-blur-enabled [role="main"] [role="grid"] div:has(> video):hover video,
+html.msg-blur-enabled [role="main"] [role="grid"] div:has(> div > video):hover video,
+html.msg-blur-enabled [role="main"] [role="grid"] div:has(> [role="img"]):hover [role="img"],
+html.msg-blur-enabled [role="main"] [role="grid"] div:has(> div > [role="img"]):hover [role="img"],
+html.msg-blur-enabled [role="main"] [role="grid"] div:has(> svg):hover svg,
+html.msg-blur-enabled [role="main"] [role="grid"] div:has(> [aria-label*="sticker" i]):hover [aria-label*="sticker" i],
+html.msg-blur-enabled [role="main"] [role="grid"] div:has(> div > [aria-label*="sticker" i]):hover [aria-label*="sticker" i],
+
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"]:hover img,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"]:hover video,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"]:hover audio,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"]:hover [role="img"]:not(svg),
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"]:hover svg,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"]:hover svg image,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"]:hover [aria-label*="sticker" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"]:hover [aria-label*="photo" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"]:hover [aria-label*="image" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"]:hover [aria-label*="video" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"]:hover [aria-label*="voice clip" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"]:hover [aria-label*="audio" i],
+
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"]:hover img,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"]:hover video,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"]:hover [role="img"]:not(svg),
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"]:hover svg,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"]:hover svg image,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"]:hover [aria-label*="sticker" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"]:hover [aria-label*="photo" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"]:hover [aria-label*="image" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] div:has(> img):hover img,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] div:has(> div > img):hover img,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] div:has(> div > div > img):hover img,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] div:has(> video):hover video,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] div:has(> div > video):hover video,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] div:has(> [role="img"]):hover [role="img"],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] div:has(> div > [role="img"]):hover [role="img"],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] div:has(> svg):hover svg,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] div:has(> [aria-label*="sticker" i]):hover [aria-label*="sticker" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] div:has(> div > [aria-label*="sticker" i]):hover [aria-label*="sticker" i],
+html.msg-blur-enabled.blur-media [role="dialog"] img:hover,
+html.msg-blur-enabled.blur-media [role="dialog"] video:hover,
+html.msg-blur-enabled.blur-media [role="dialog"] [role="img"]:hover {
+  filter: blur(0px) !important;
+}
+
+
+/* ==========================================================================
+   3. CONTACT NAMES & HEADER BLUR (Sidebar & Top Conversation Header)
+   ========================================================================== */
+/* Left navigation list contact names */
+html.msg-blur-enabled.blur-names [role="navigation"] [role="row"] span[dir="auto"],
+html.msg-blur-enabled.blur-names [role="navigation"] [role="gridcell"] span[dir="auto"],
+html.msg-blur-enabled.blur-names div[aria-label*="Chats" i] [role="row"] span[dir="auto"],
+html.msg-blur-enabled.blur-names div[aria-label*="Chats" i] [role="gridcell"] span[dir="auto"],
+
+/* TOP CONVERSATION HEADER: Contact Name, Group Name, and "Active now" status */
+html.msg-blur-enabled.blur-names [role="main"] [dir="auto"]:not([role="grid"] *):not([role="textbox"] *):not([contenteditable="true"] *),
+html.msg-blur-enabled.blur-names [role="main"] a[role="link"] [dir="auto"],
+html.msg-blur-enabled.blur-names [role="main"] h1,
+html.msg-blur-enabled.blur-names [role="main"] h2,
+html.msg-blur-enabled.blur-names [role="main"] span[dir="auto"]:not([role="grid"] *):not([role="textbox"] *),
+
+/* Right sidebar details */
+html.msg-blur-enabled.blur-names [role="complementary"] h2,
+html.msg-blur-enabled.blur-names [role="complementary"] span[dir="auto"] {
+  filter: blur(var(--msg-blur-radius)) !important;
+  transition: filter var(--msg-transition-speed) cubic-bezier(0.4, 0, 0.2, 1) !important;
+  user-select: none !important;
+}
+
+/* Reveal contact names on hover in left list */
+html.msg-blur-enabled.blur-names [role="navigation"] [role="row"]:hover span[dir="auto"],
+html.msg-blur-enabled.blur-names [role="navigation"] [role="gridcell"]:hover span[dir="auto"],
+html.msg-blur-enabled.blur-names div[aria-label*="Chats" i] [role="row"]:hover span[dir="auto"],
+
+/* Reveal conversation header name on hover */
+html.msg-blur-enabled.blur-names [role="main"] [dir="auto"]:not([role="grid"] *):not([role="textbox"] *):hover,
+html.msg-blur-enabled.blur-names [role="main"] a[role="link"]:hover [dir="auto"],
+html.msg-blur-enabled.blur-names [role="main"] h1:hover,
+html.msg-blur-enabled.blur-names [role="main"] h2:hover,
+html.msg-blur-enabled.blur-names [role="main"] div:has(> a[role="link"]):hover [dir="auto"],
+html.msg-blur-enabled.blur-names [role="main"] div:has(> h1):hover [dir="auto"],
+html.msg-blur-enabled.blur-names [role="main"] div:has(> h2):hover [dir="auto"],
+
+/* Right sidebar reveal */
+html.msg-blur-enabled.blur-names [role="complementary"]:hover h2,
+html.msg-blur-enabled.blur-names [role="complementary"]:hover span[dir="auto"] {
+  filter: blur(0px) !important;
+  user-select: text !important;
+}
+
+
+/* ==========================================================================
+   4. PROFILE PICTURES & AVATARS BLUR
+   ========================================================================== */
+/* Left navigation list avatars */
+html.msg-blur-enabled.blur-avatars [role="navigation"] svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="navigation"] svg:has(mask):has(image),
+html.msg-blur-enabled.blur-avatars [role="navigation"] svg image,
+html.msg-blur-enabled.blur-avatars [role="navigation"] img,
+html.msg-blur-enabled.blur-avatars div[aria-label*="Chats" i] svg:has(image),
+html.msg-blur-enabled.blur-avatars div[aria-label*="Chats" i] svg image,
+html.msg-blur-enabled.blur-avatars div[aria-label*="Chats" i] img,
+
+/* Top Conversation Header Avatar (strictly outside role="grid") */
+html.msg-blur-enabled.blur-avatars [role="main"] svg:has(image):not([role="grid"] *),
+html.msg-blur-enabled.blur-avatars [role="main"] svg:not([role="grid"] *) image,
+html.msg-blur-enabled.blur-avatars [role="main"] img:not([role="grid"] *),
+html.msg-blur-enabled.blur-avatars [role="main"] a[role="link"]:not([role="grid"] *) svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="main"] a[role="link"]:not([role="grid"] *) img,
+
+/* Message Stream Sender Avatars (strictly outside role="gridcell") */
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] [role="row"] a[role="link"]:not([role="gridcell"] *) svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] [role="row"] a[role="link"]:not([role="gridcell"] *) img,
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] [role="row"] svg:has(image):not([role="gridcell"] *),
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] [role="row"] svg:not([role="gridcell"] *) image,
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] [aria-label*="profile" i]:not([role="gridcell"] *) svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] [aria-label*="profile" i]:not([role="gridcell"] *) img,
+html.msg-blur-enabled.blur-avatars [role="main"] img[alt*="profile" i]:not([role="gridcell"] *),
+html.msg-blur-enabled.blur-avatars [role="main"] img[alt*="avatar" i]:not([role="gridcell"] *),
+
+/* Seen Receipts & Read Status Indicators (Mini avatars on bottom right of messages) */
+html.msg-blur-enabled.blur-avatars [role="main"] [aria-label*="Seen by" i] svg,
+html.msg-blur-enabled.blur-avatars [role="main"] [aria-label*="Seen by" i] img,
+html.msg-blur-enabled.blur-avatars [role="main"] [aria-label*="Seen by" i],
+html.msg-blur-enabled.blur-avatars [role="main"] img[alt*="Seen by" i],
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] div:has(> img[alt*="Seen" i]),
+
+/* Right Info Sidebar & Dialogs */
+html.msg-blur-enabled.blur-avatars [role="complementary"] svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="complementary"] svg image,
+html.msg-blur-enabled.blur-avatars [role="complementary"] img,
+html.msg-blur-enabled.blur-avatars [role="dialog"] svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="dialog"] img {
+  filter: blur(var(--msg-blur-radius)) !important;
+  transition: filter var(--msg-transition-speed) cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Reveal avatars on hover */
+html.msg-blur-enabled.blur-avatars [role="navigation"] [role="row"]:hover svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="navigation"] [role="row"]:hover svg image,
+html.msg-blur-enabled.blur-avatars [role="navigation"] [role="row"]:hover img,
+html.msg-blur-enabled.blur-avatars div[aria-label*="Chats" i] [role="row"]:hover svg:has(image),
+html.msg-blur-enabled.blur-avatars div[aria-label*="Chats" i] [role="row"]:hover svg image,
+html.msg-blur-enabled.blur-avatars div[aria-label*="Chats" i] [role="row"]:hover img,
+
+html.msg-blur-enabled.blur-avatars [role="main"] svg:has(image):not([role="grid"] *):hover,
+html.msg-blur-enabled.blur-avatars [role="main"] svg:not([role="grid"] *):hover image,
+html.msg-blur-enabled.blur-avatars [role="main"] img:not([role="grid"] *):hover,
+html.msg-blur-enabled.blur-avatars [role="main"] a[role="link"]:not([role="grid"] *):hover svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="main"] a[role="link"]:not([role="grid"] *):hover img,
+html.msg-blur-enabled.blur-avatars [role="main"] div:has(> a[role="link"]:not([role="grid"] *)):hover svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="main"] div:has(> a[role="link"]:not([role="grid"] *)):hover img,
+html.msg-blur-enabled.blur-avatars [role="main"] div:has(> h1):hover svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="main"] div:has(> h2):hover svg:has(image),
+
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] [role="row"]:hover a[role="link"] svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] [role="row"]:hover a[role="link"] img,
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] [role="row"]:hover svg:has(image):not([role="gridcell"] *),
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] [role="row"]:hover svg:not([role="gridcell"] *) image,
+html.msg-blur-enabled.blur-avatars [role="main"] [aria-label*="Seen by" i]:hover svg,
+html.msg-blur-enabled.blur-avatars [role="main"] [aria-label*="Seen by" i]:hover img,
+html.msg-blur-enabled.blur-avatars [role="complementary"]:hover svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="complementary"]:hover svg image,
+html.msg-blur-enabled.blur-avatars [role="complementary"]:hover img {
+  filter: blur(0px) !important;
+}
+
+
+/* ==========================================================================
+   5. CHAT LIST PREVIEWS BLUR (Latest message snippet in sidebar)
+   ========================================================================== */
+html.msg-blur-enabled.blur-previews [role="navigation"] [role="row"] span,
+html.msg-blur-enabled.blur-previews div[aria-label*="Chats" i] [role="row"] span {
+  filter: blur(var(--msg-blur-radius)) !important;
+  transition: filter var(--msg-transition-speed) cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html.msg-blur-enabled.blur-previews [role="navigation"] [role="row"]:hover span,
+html.msg-blur-enabled.blur-previews div[aria-label*="Chats" i] [role="row"]:hover span {
+  filter: blur(0px) !important;
+}
+
+
+/* ==========================================================================
+   6. INPUT / TYPING BOX BLUR
+   ========================================================================== */
+html.msg-blur-enabled.blur-input [role="textbox"],
+html.msg-blur-enabled.blur-input [contenteditable="true"] {
+  filter: blur(var(--msg-blur-radius)) !important;
+  transition: filter var(--msg-transition-speed) cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html.msg-blur-enabled.blur-input [role="textbox"]:hover,
+html.msg-blur-enabled.blur-input [role="textbox"]:focus,
+html.msg-blur-enabled.blur-input [role="textbox"]:focus-within,
+html.msg-blur-enabled.blur-input [contenteditable="true"]:hover,
+html.msg-blur-enabled.blur-input [contenteditable="true"]:focus,
+html.msg-blur-enabled.blur-input [contenteditable="true"]:focus-within {
+  filter: blur(0px) !important;
+}
+
+
+/* ==========================================================================
+   7. MESSAGE COMPOSER PROTECTION (Never blur Like button, emoji picker, etc.)
+   ========================================================================== */
+html.msg-blur-enabled [role="main"] [role="region"] svg,
+html.msg-blur-enabled [role="main"] [role="region"] svg image,
+html.msg-blur-enabled [role="main"] [role="region"] [role="img"],
+html.msg-blur-enabled [role="main"] [role="region"] img,
+html.msg-blur-enabled [role="main"] [role="region"] [role="button"],
+html.msg-blur-enabled [role="main"] form svg,
+html.msg-blur-enabled [role="main"] form svg image,
+html.msg-blur-enabled [role="main"] form [role="img"],
+html.msg-blur-enabled [role="main"] form img,
+html.msg-blur-enabled [role="main"] form [role="button"],
+html.msg-blur-enabled [role="main"] div:has(> [role="textbox"]) svg,
+html.msg-blur-enabled [role="main"] div:has(> [role="textbox"]) svg image,
+html.msg-blur-enabled [role="main"] div:has(> [role="textbox"]) [role="img"],
+html.msg-blur-enabled [role="main"] div:has(> [role="textbox"]) img,
+html.msg-blur-enabled [role="main"] div:has(> [role="textbox"]) [role="button"],
+html.msg-blur-enabled [role="main"] div:has(> [contenteditable="true"]) svg,
+html.msg-blur-enabled [role="main"] div:has(> [contenteditable="true"]) svg image,
+html.msg-blur-enabled [role="main"] div:has(> [contenteditable="true"]) [role="img"],
+html.msg-blur-enabled [role="main"] div:has(> [contenteditable="true"]) img,
+html.msg-blur-enabled [role="main"] div:has(> [contenteditable="true"]) [role="button"],
+html.msg-blur-enabled [role="main"] [aria-label*="Send" i],
+html.msg-blur-enabled [role="main"] [aria-label*="Like" i],
+html.msg-blur-enabled [role="main"] [aria-label*="Thumbs" i],
+html.msg-blur-enabled [role="main"] [aria-label*="sticker" i]:not([role="grid"] *),
+html.msg-blur-enabled [role="main"] [aria-label*="emoji" i]:not([role="grid"] *),
+html.msg-blur-enabled [role="main"] [aria-label*="gif" i]:not([role="grid"] *),
+html.msg-blur-enabled [role="main"] [aria-label*="attach" i]:not([role="grid"] *) {
+  filter: blur(0px) !important;
+}
+
+
+/* ==========================================================================
+   8. JAVASCRIPT ACTIVE REVEAL CLASS (100% Guaranteed Unblur on Hover)
+   ========================================================================== */
+html.msg-blur-enabled .msg-revealed,
+html.msg-blur-enabled [role="main"] .msg-revealed,
+html.msg-blur-enabled [role="main"] [role="grid"] .msg-revealed,
+html.msg-blur-enabled [role="main"] [role="grid"] [role="row"].msg-revealed,
+html.msg-blur-enabled [role="main"] [role="grid"] [role="row"].msg-revealed *,
+html.msg-blur-enabled [role="main"] [role="grid"] [role="gridcell"].msg-revealed,
+html.msg-blur-enabled [role="main"] [role="grid"] [role="gridcell"].msg-revealed *,
+
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] [role="row"].msg-revealed [dir="auto"],
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] [role="row"].msg-revealed *,
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] [role="gridcell"].msg-revealed [dir="auto"],
+html.msg-blur-enabled.blur-messages [role="main"] [role="grid"] [role="gridcell"].msg-revealed *,
+
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"].msg-revealed img,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"].msg-revealed video,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"].msg-revealed audio,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"].msg-revealed [role="img"],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"].msg-revealed svg,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"].msg-revealed svg image,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"].msg-revealed [aria-label*="sticker" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"].msg-revealed [aria-label*="photo" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="row"].msg-revealed *,
+
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"].msg-revealed img,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"].msg-revealed video,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"].msg-revealed audio,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"].msg-revealed [role="img"],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"].msg-revealed svg,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"].msg-revealed svg image,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"].msg-revealed [aria-label*="sticker" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] [role="gridcell"].msg-revealed *,
+
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] .msg-revealed img,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] .msg-revealed video,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] .msg-revealed audio,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] .msg-revealed [role="img"],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] .msg-revealed svg,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] .msg-revealed svg image,
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] .msg-revealed [aria-label*="sticker" i],
+html.msg-blur-enabled.blur-media [role="main"] [role="grid"] .msg-revealed *,
+
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] [role="row"].msg-revealed svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] [role="row"].msg-revealed svg,
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] [role="row"].msg-revealed img,
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] .msg-revealed svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] .msg-revealed svg,
+html.msg-blur-enabled.blur-avatars [role="main"] [role="grid"] .msg-revealed img,
+
+html.msg-blur-enabled.blur-avatars [role="main"] svg:has(image):not([role="grid"] *).msg-revealed,
+html.msg-blur-enabled.blur-avatars [role="main"] .msg-revealed svg:has(image):not([role="grid"] *),
+html.msg-blur-enabled.blur-avatars [role="main"] a:not([role="grid"] *).msg-revealed svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="main"] a.msg-revealed svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="main"] svg:not([role="grid"] *).msg-revealed image,
+html.msg-blur-enabled.blur-avatars [role="main"] img:not([role="grid"] *).msg-revealed,
+html.msg-blur-enabled.blur-avatars [role="main"] .msg-revealed img:not([role="grid"] *),
+html.msg-blur-enabled.blur-avatars [role="main"] a:not([role="grid"] *).msg-revealed img,
+html.msg-blur-enabled.blur-avatars [role="main"] a.msg-revealed img,
+
+html.msg-blur-enabled.blur-avatars [role="main"] .msg-revealed svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="main"] .msg-revealed svg image,
+html.msg-blur-enabled.blur-avatars [role="main"] .msg-revealed img,
+html.msg-blur-enabled.blur-avatars [role="navigation"] .msg-revealed svg:has(image),
+html.msg-blur-enabled.blur-avatars [role="navigation"] .msg-revealed svg image,
+html.msg-blur-enabled.blur-avatars [role="navigation"] .msg-revealed img,
+
+html.msg-blur-enabled .msg-revealed [dir="auto"],
+html.msg-blur-enabled .msg-revealed img,
+html.msg-blur-enabled .msg-revealed video,
+html.msg-blur-enabled .msg-revealed audio,
+html.msg-blur-enabled .msg-revealed [role="img"],
+html.msg-blur-enabled .msg-revealed [aria-label*="sticker" i],
+html.msg-blur-enabled .msg-revealed [aria-label*="photo" i],
+html.msg-blur-enabled .msg-revealed [aria-label*="image" i],
+html.msg-blur-enabled .msg-revealed svg,
+html.msg-blur-enabled .msg-revealed svg:has(image),
+html.msg-blur-enabled .msg-revealed svg image {
+  filter: blur(0px) !important;
+  user-select: text !important;
+}
+
+
+/* ==========================================================================
+   8. ON-SCREEN HUD NOTIFICATION (When toggled via Alt+B)
+   ========================================================================== */
+.msg-privacy-hud {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(18, 20, 29, 0.92);
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  z-index: 999999999;
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.msg-privacy-hud.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.msg-privacy-hud-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

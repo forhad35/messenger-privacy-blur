@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messenger Privacy Blur</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo-wrapper">
+          <img src="icons/icon32.png" alt="Logo" class="logo-icon">
+        </div>
+        <div class="brand-text">
+          <h1>Privacy Blur</h1>
+          <span class="subtext">For Messenger.com</span>
+        </div>
+      </div>
+      <div class="master-toggle-container">
+        <label class="switch switch-lg" title="Turn Privacy Protection ON / OFF">
+          <input type="checkbox" id="masterEnabled">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </header>
+
+    <!-- Status Banner -->
+    <div id="statusBanner" class="status-banner active">
+      <div class="status-dot"></div>
+      <span id="statusText">Protection is Active</span>
+    </div>
+
+    <!-- Features Group -->
+    <section class="section">
+      <h2 class="section-title">Blur Options (Hover to Reveal)</h2>
+
+      <div class="feature-list">
+        <!-- Messages -->
+        <label class="feature-item" for="blurMessages">
+          <div class="feature-info">
+            <div class="feature-icon">💬</div>
+            <div class="feature-text">
+              <span class="feature-title">Chat Messages</span>
+              <span class="feature-desc">Blur message bubbles until hovered</span>
+            </div>
+          </div>
+          <div class="switch">
+            <input type="checkbox" id="blurMessages">
+            <span class="slider"></span>
+          </div>
+        </label>
+
+        <!-- Media / Photos -->
+        <label class="feature-item" for="blurMedia">
+          <div class="feature-info">
+            <div class="feature-icon">🖼️</div>
+            <div class="feature-text">
+              <span class="feature-title">Photos & Videos</span>
+              <span class="feature-desc">Blur images, videos, audio & stickers</span>
+            </div>
+          </div>
+          <div class="switch">
+            <input type="checkbox" id="blurMedia">
+            <span class="slider"></span>
+          </div>
+        </label>
+
+        <!-- Contact Names -->
+        <label class="feature-item" for="blurNames">
+          <div class="feature-info">
+            <div class="feature-icon">👤</div>
+            <div class="feature-text">
+              <span class="feature-title">Contact Names</span>
+              <span class="feature-desc">Blur names in chat header & sidebar</span>
+            </div>
+          </div>
+          <div class="switch">
+            <input type="checkbox" id="blurNames">
+            <span class="slider"></span>
+          </div>
+        </label>
+
+        <!-- Profile Pictures -->
+        <label class="feature-item" for="blurAvatars">
+          <div class="feature-info">
+            <div class="feature-icon">🎭</div>
+            <div class="feature-text">
+              <span class="feature-title">Profile Pictures</span>
+              <span class="feature-desc">Blur contact avatars & group photos</span>
+            </div>
+          </div>
+          <div class="switch">
+            <input type="checkbox" id="blurAvatars">
+            <span class="slider"></span>
+          </div>
+        </label>
+
+        <!-- Chat Previews -->
+        <label class="feature-item" for="blurPreviews">
+          <div class="feature-info">
+            <div class="feature-icon">📑</div>
+            <div class="feature-text">
+              <span class="feature-title">Sidebar Previews</span>
+              <span class="feature-desc">Blur latest message snippet in chat list</span>
+            </div>
+          </div>
+          <div class="switch">
+            <input type="checkbox" id="blurPreviews">
+            <span class="slider"></span>
+          </div>
+        </label>
+
+        <!-- Typing Box -->
+        <label class="feature-item" for="blurInput">
+          <div class="feature-info">
+            <div class="feature-icon">⌨️</div>
+            <div class="feature-text">
+              <span class="feature-title">Typing Input</span>
+              <span class="feature-desc">Blur input area until clicked or focused</span>
+            </div>
+          </div>
+          <div class="switch">
+            <input type="checkbox" id="blurInput">
+            <span class="slider"></span>
+          </div>
+        </label>
+      </div>
+    </section>
+
+    <!-- Sliders -->
+    <section class="section">
+      <h2 class="section-title">Blur Intensity</h2>
+      <div class="slider-group">
+        <div class="slider-header">
+          <span>Text Blur</span>
+          <span id="textBlurVal" class="slider-val">10px</span>
+        </div>
+        <input type="range" id="blurRadius" min="4" max="25" value="10" class="range-input">
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-header">
+          <span>Media Blur</span>
+          <span id="mediaBlurVal" class="slider-val">16px</span>
+        </div>
+        <input type="range" id="blurMediaRadius" min="6" max="30" value="16" class="range-input">
+      </div>
+    </section>
+
+    <!-- Footer / Shortcut -->
+    <footer class="footer">
+      <div class="shortcut-tip">
+        <span>Quick Toggle:</span>
+        <kbd>Alt + B</kbd>
+      </div>
+      <div class="hint">Works on Messenger.com & Facebook Messages</div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

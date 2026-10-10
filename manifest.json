@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "Messenger Privacy Blur (WA Web Plus Style)",
+  "version": "1.0.0",
+  "description": "Blurs messages, media, photos, and names on Messenger. Hover over or focus on any element to reveal it smoothly.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "Messenger Privacy Blur Settings"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.messenger.com/*",
+    "https://messenger.com/*",
+    "https://www.facebook.com/messages/*",
+    "https://web.facebook.com/messages/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.messenger.com/*",
+        "https://messenger.com/*",
+        "https://www.facebook.com/messages/*",
+        "https://web.facebook.com/messages/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "commands": {
+    "toggle-blur": {
+      "suggested_key": {
+        "default": "Alt+B",
+        "mac": "Alt+B"
+      },
+      "description": "Quick toggle privacy blur ON / OFF"
+    }
+  }
+}
